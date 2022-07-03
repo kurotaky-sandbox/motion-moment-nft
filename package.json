@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
+    "@openzeppelin/contracts": "^4.7.0",
+    "dotenv": "^16.0.1",
     "formidable": "^2.0.1",
+    "hardhat": "^2.9.9",
     "next": "12.2.0",
+    "nft.storage": "^6.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
