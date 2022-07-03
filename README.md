@@ -27,7 +27,7 @@ Until now, the moment of a super play has been preserved in history as a video o
 In the future, wearable devices and other sensors will be attached to the human body at all times, and more and more attempts will be made to sense and digitize the movements of the human body during sports activities.
 We would like to record the numerical data of inspiring plays as NFT so that the record of super plays can be viewed anywhere in the world.
 
-![dapps image]()
+![dapps image](https://raw.githubusercontent.com/kurotaky-sandbox/motion-moment-nft/main/public/mmnft-image.png)
 
 ## 使用した技術
 
