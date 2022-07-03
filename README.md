@@ -9,7 +9,7 @@ MotionMomentNFT
 
 ## プロジェクトについて（2-3行）
 
-筋電センサーなどの人体をセンシングするデバイスのデータをアップロードして、スポーツや芸能などのスーパープレイの瞬間をNFTとして保存するプロジェクトです。
+筋電センサーなどの人体をセンシングするデバイスで取得したデータをアップロードして、スポーツや芸能などのスーパープレイの瞬間をNFTとして保存するプロジェクトです。
 This project uploads data from myoelectric sensors and other human motion sensing devices to NFT and store moments of recordings of sports, entertainment, and other super-plays.
 
 ## 解決しようとしている課題
@@ -26,6 +26,8 @@ Many inspiring plays are created in sports and entertainment.
 Until now, the moment of a super play has been preserved in history as a video or photograph, but we believe that there have been few attempts to preserve the movements of the human body on the blockchain in detail.
 In the future, wearable devices and other sensors will be attached to the human body at all times, and more and more attempts will be made to sense and digitize the movements of the human body during sports activities.
 We would like to record the numerical data of inspiring plays as NFT so that the record of super plays can be viewed anywhere in the world.
+
+![dapps image]()
 
 ## 使用した技術
 
