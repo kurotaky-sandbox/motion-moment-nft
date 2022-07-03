@@ -7,24 +7,28 @@ dotenv.config()
 const { NFT_STORAGE_API_KEY } = process.env
 
 export const config = {
-  api: {
-    bodyParser: false
-  }
+    api: {
+        bodyParser: false
+    }
 };
 
 const post = async (req, res) => {
-  const form = new formidable.IncomingForm();
-  form.parse(req, async function (err, fields, files) {
-    await saveFile(files.file);
-    return res.status(201).send("201: file created!");
-  });
+    const form = new formidable.IncomingForm();
+    form.parse(req, async function (err, fields, files) {
+        await saveFile(files.file);
+        return res.status(201).send("201: file created!");
+    });
 };
 
 const saveFile = async (file) => {
-  const data = fs.readFileSync(file.filepath);
-  fs.writeFileSync(`./public/${file.originalFilename}`, data);
-  await fs.unlinkSync(file.filepath);
-  await storeAsset(file);
+    const data = fs.readFileSync(file.filepath);
+    fs.writeFileSync(`./public/${file.originalFilename}`, data);
+    fs.unlinkSync(file.filepath);
+    const metadataUrl = await storeAsset(file);
+    fs.writeFileSync(`./public/metadata.txt`, metadataUrl);
+    const { execSync } = require('child_process')
+    const stdout = execSync('npx hardhat run scripts/mint-nft.mjs \--network PolygonMumbai')
+    console.log(`stdout: ${stdout.toString()}`)
 };
 
 const storeAsset = async (file) => {
@@ -43,16 +47,17 @@ const storeAsset = async (file) => {
         }
     })
     console.log("Metadata stored on Filecoin and IPFS with URL:", metadata.url)
- }
+    return metadata.url;
+}
 
 export default (req, res) => {
-  req.method === "POST"
-    ? post(req, res)
-    : req.method === "PUT"
-    ? console.log("PUT")
-    : req.method === "DELETE"
-    ? console.log("DELETE")
-    : req.method === "GET"
-    ? console.log("GET")
-    : res.status(404).send("");
+    req.method === "POST"
+        ? post(req, res)
+        : req.method === "PUT"
+            ? console.log("PUT")
+            : req.method === "DELETE"
+                ? console.log("DELETE")
+                : req.method === "GET"
+                    ? console.log("GET")
+                    : res.status(404).send("");
 };
