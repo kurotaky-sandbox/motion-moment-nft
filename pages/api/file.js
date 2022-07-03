@@ -24,25 +24,23 @@ const saveFile = async (file) => {
   const data = fs.readFileSync(file.filepath);
   fs.writeFileSync(`./public/${file.originalFilename}`, data);
   await fs.unlinkSync(file.filepath);
-  storeAsset(file)
-   .then(() => process.exit(0))
-   .catch((error) => {
-       console.error(error);
-       process.exit(1);
-   });
-  return;
+  await storeAsset(file);
 };
 
-async function storeAsset(file) {
+const storeAsset = async (file) => {
     const client = new NFTStorage({ token: NFT_STORAGE_API_KEY })
     const metadata = await client.store({
         name: 'MotionMomentNFT',
         description: 'Motion Moment NFT!',
         image: new File(
-            [await fs.promises.readFile(`./public/${file.originalFilename}.csv`)],
-            `MotionMomentNFT${file.originalFilename}.csv`,
-            { type: 'text/csv' }
+            [await fs.promises.readFile(`./public/MotionMoment.png`)],
+            `MotionMoment.png`,
+            { type: 'image/*' }
         ),
+        properties: {
+            custom: 'Data from past moments of physical movement are stored.',
+            file: new File([await fs.promises.readFile(`./public/${file.originalFilename}`)], `${file.originalFilename}`, { type: 'text/csv' }),
+        }
     })
     console.log("Metadata stored on Filecoin and IPFS with URL:", metadata.url)
  }
